@@ -1,21 +1,34 @@
 // On récupère l'objet #grid
 const grid = document.getElementById("grid");
 // Demande à l'utilisateur de la taille de la grille
-const userInput = Number(prompt("Taille de la grille ?"));
+// const userInput = Number(prompt("Taille de la grille ?"));
 // On met un style CSS à la grille pour gérer le nombre de colonnes
-grid.style.gridTemplateColumns = `repeat(${userInput}, 1fr)`;
 
-for (let round = 0; round < userInput; round++) {
-  for (let round = 0; round < userInput; round++) {
-  // On crée un élément pixel
-  const pixel = document.createElement("div");
-  // On lui ajoute la class="pixel"
-  pixel.classList.add("pixel", "grey");
-  // On l'ajoute dans la #grid
-  grid.appendChild(pixel);
-  // 
+// On récupère le formulaire
+const form = document.querySelector("form");
+// On récupère l'élément input .grid-size
+const gridSizeInput = document.querySelector(".grid-size");
+
+// Quand on clique sur le bouton on récupère la valeur de l'input .grid-size
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const gridSizeInputValue = gridSizeInput.value;
+
+  // On crée la grille
+  grid.style.gridTemplateColumns = `repeat(${gridSizeInputValue}, 1fr)`;
+  
+  for (let round = 0; round < gridSizeInputValue; round++) {
+    for (let round = 0; round < gridSizeInputValue; round++) {
+    // On crée un élément pixel
+    const pixel = document.createElement("div");
+    // On lui ajoute la class="pixel"
+    pixel.classList.add("pixel", "grey");
+    // On l'ajoute dans la #grid
+    grid.appendChild(pixel);
+    // 
+    }
   }
-}
+});
 
 const pixels = document.querySelectorAll(".pixel");
 
