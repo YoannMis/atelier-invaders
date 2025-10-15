@@ -16,8 +16,8 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   // On récupère tous les pixels
   // On supprime les pixels du dom
-  const pixels = document.querySelectorAll('.pixel');
-  for (const pixel of pixels) {
+  const pixelsToRemove = document.querySelectorAll('.pixel');
+  for (const pixel of pixelsToRemove) {
     pixel.remove();
   }
   
@@ -44,19 +44,19 @@ form.addEventListener("submit", (event) => {
       // 
     }
   }
+  const pixels = document.querySelectorAll(".pixel");
+  
+  for (const pixel of pixels){
+    // Écouter l'évènement 'click' sur un pixel
+    // Au clic on change la couleur du pixel avec un changement de classe
+    pixel.addEventListener("click", () => {
+      if (pixel.classList.contains("grey")) {
+      pixel.classList.replace("grey", "dark");
+    } else if (pixel.classList.contains("dark")){
+      pixel.classList.replace("dark", "grey");
+    }
+    });
+  }
   form.reset();
 });
 
-const pixels = document.querySelectorAll(".pixel");
-
-for (const pixel of pixels){
-  // Écouter l'évènement 'click' sur un pixel
-  // Au clic on change la couleur du pixel avec un changement de classe
-  pixel.addEventListener("click", () => {
-    if (pixel.classList.contains("grey")) {
-    pixel.classList.replace("grey", "dark");
-  } else if (pixel.classList.contains("dark")){
-    pixel.classList.replace("dark", "grey");
-  }
-  });
-}
