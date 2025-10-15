@@ -23,9 +23,9 @@ main {
     align-items: center;
 }
 
-.grid {
+#grid {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    /* grid-template-columns: repeat(8, 1fr); */
     grid-template-rows: auto;
     width: auto;
     height: auto;
