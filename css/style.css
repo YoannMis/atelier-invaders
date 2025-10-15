@@ -1,0 +1,39 @@
+:root {
+    --pixel-color-grey-light: #D2DAE2;
+    --pixel-border-grey-light: #808E9B;
+    --pixel-color-grey-dark: #485460;
+    --pixel-border-grey-dark: #1D262D;
+    --bg-color-main: #665ACE;
+    --bg-color-header: #3148AD;
+}
+
+header {
+    background-color: var(--bg-color-header);
+    height: 20dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-color: var(--bg-color-main);
+    height: 80dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    width: auto;
+    height: auto;
+}
+
+.pixel {
+    background-color: var(--pixel-color-grey-light);
+    border: 2px solid var(--pixel-border-grey-light);
+    height: 50px;
+    width: 50px;
+}
