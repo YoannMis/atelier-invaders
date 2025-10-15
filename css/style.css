@@ -3,8 +3,14 @@
     --pixel-border-grey-light: #808E9B;
     --pixel-color-grey-dark: #485460;
     --pixel-border-grey-dark: #1D262D;
+    --pixel-color-green: #79EA83;
+    --pixel-border-green: #509b56;
+    --pixel-color-orange: #FBC048;
+    --pixel-border-orange: #c89a3f;
+
     --bg-color-main: #665ACE;
     --bg-color-header: #3148AD;
+
 }
 
 header {
@@ -21,6 +27,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 #grid {
@@ -45,3 +52,41 @@ main {
     background-color: var(--pixel-color-grey-dark);
     border: 2px solid var(--pixel-border-grey-dark);
 }
+
+.green {
+    background-color: var(--pixel-color-green);
+    border: 2px solid var(--pixel-border-green);
+}
+
+.orange {
+    background-color: var(--pixel-color-orange);
+    border: 2px solid var(--pixel-border-orange);
+}
+
+.palette {
+    background-color: #4A45A3;
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.palette > * {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-width: 4px;
+
+}
+
+.color-selected{
+    width: 80px;
+    height: 80px; 
+}
+
+
+
