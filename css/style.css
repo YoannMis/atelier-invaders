@@ -41,6 +41,8 @@ main {
 .pixel {
     height: 50px;
     width: 50px;
+    background-color: var(--pixel-color-grey-light);
+    border: 2px solid var(--pixel-border-grey-light);
 }
 
 .grey {

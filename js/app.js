@@ -61,20 +61,41 @@ form.addEventListener("submit", (event) => {
   
   
   
-  for (let round = 0; round < gridSizeInputValue; round++) {
-    for (let round = 0; round < gridSizeInputValue; round++) {
-      // On crée un élément pixel
-      const pixel = document.createElement("div");
-      // On lui ajoute la class="pixel"
-      pixel.classList.add("pixel", "grey");
-      // On lui ajoute la height et width
-      pixel.style.height = pixel.style.width = `${pixelSizeInputValue}px`;
-      // On l'ajoute dans la #grid
-      grid.appendChild(pixel);
+  for (let round = 0; round < Math.pow(gridSizeInputValue, 2); round++) {
+    // On crée un élément pixel
+    const pixel = document.createElement("div");
+    // On lui ajoute la class="pixel"
+    pixel.classList.add("pixel", "grey");
+    // On lui ajoute la height et width
+    pixel.style.height = pixel.style.width = `${pixelSizeInputValue}px`;
+    // On l'ajoute dans la #grid
+    grid.appendChild(pixel);
 
-    }
+    pixel.addEventListener("click", () => {
+      // Ajout d'un toggle pour activer ou désactiver la couleur dark sur un pixel
+      // pixel.classList.toggle("dark");
+
+      // Changer la couleur avec une couleur choisie dans la palette
+      // Récupérer la couleur sélectionnée dans la palette
+      const colorSelect = document.querySelector(".color-selected").classList.item(0);
+      // Récupérer la couleur actuelle du pixel sur lequel on a cliqué
+      const currentPixelColor = pixel.classList.item(1);
+      // Remplacer la couleur actuelle du pixel par la couleur sélectionnée sur la palette
+      pixel.classList.replace(currentPixelColor, colorSelect);
+    });
   }
-  const paletteColors = document.querySelectorAll(".palette > *");
+  form.reset();
+});
+
+// Gestion sélection de la palette de couleur
+
+//On récupère toutes les couleurs 
+
+
+//Si on click sur un bouton est que celui-ci n'est pas sélectionné
+//alors il devient sélectionné et tous les autres boutons se déselectionnent
+
+const paletteColors = document.querySelectorAll(".palette > *");
   
   for (const color of paletteColors) {
     color.addEventListener("click", () => {
@@ -87,25 +108,4 @@ form.addEventListener("submit", (event) => {
       // color.classList.add("color-selected");
     });
   }
-  let colorSelect = document.querySelector(".color-selected").item(0);
-
-  pixel.addEventListener("click", () => {
-  //   if (pixel.classList.contains("grey")) {
-  //   pixel.classList.replace("grey", "dark");
-  // } else if (pixel.classList.contains("dark")){
-  //   pixel.classList.replace("dark", "grey");
-  // }
-  let currentPixelColor = pixel.classList.item(-1);
-  pixel.classList.replace(currentPixelColor, colorSelect);
-  });
-  form.reset();
-});
-
-// Gestion sélection de la palette de couleur
-
-//On récupère toutes les couleurs 
-
-
-//Si on click sur un bouton est que celui-ci n'est pas sélectionné
-//alors il devient sélectionné et tous les autres boutons se déselectionnent
-
+  
