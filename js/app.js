@@ -6,6 +6,24 @@ const grid = document.getElementById("grid");
 
 // On récupère le formulaire
 const form = document.querySelector("form");
+
+//On créé un formulaire en JS
+// const form = document.createElement("form");
+// const gridSizeInput = document.createElement("input");
+// gridSizeInput.classList.add("grid-size")
+// gridSizeInput.setAttribute("type", "number");
+// gridSizeInput.setAttribute("min", "0");
+// gridSizeInput.setAttribute("max", "100");
+// gridSizeInput.setAttribute("step", "1");
+
+// const pixelSizeInput = document.createElement("input");
+// pixelSizeInput.classList.add("grid-size")
+// pixelSizeInput.setAttribute("type", "number");
+// pixelSizeInput.setAttribute("min", "0");
+// pixelSizeInput.setAttribute("max", "100");
+// pixelSizeInput.setAttribute("step", "1");
+
+
 // On récupère l'élément input .grid-size
 const gridSizeInput = document.querySelector(".grid-size");
 // On récupère l'élément input .pixel-size
@@ -38,24 +56,16 @@ form.addEventListener("submit", (event) => {
       pixel.classList.add("pixel", "grey");
       // On lui ajoute la height et width
       pixel.style.height = pixel.style.width = `${pixelSizeInputValue}px`;
-      
       // On l'ajoute dans la #grid
       grid.appendChild(pixel);
-      // 
+      pixel.addEventListener("click", () => {
+        if (pixel.classList.contains("grey")) {
+        pixel.classList.replace("grey", "dark");
+      } else if (pixel.classList.contains("dark")){
+        pixel.classList.replace("dark", "grey");
+      }
+      });
     }
-  }
-  const pixels = document.querySelectorAll(".pixel");
-  
-  for (const pixel of pixels){
-    // Écouter l'évènement 'click' sur un pixel
-    // Au clic on change la couleur du pixel avec un changement de classe
-    pixel.addEventListener("click", () => {
-      if (pixel.classList.contains("grey")) {
-      pixel.classList.replace("grey", "dark");
-    } else if (pixel.classList.contains("dark")){
-      pixel.classList.replace("dark", "grey");
-    }
-    });
   }
   form.reset();
 });
