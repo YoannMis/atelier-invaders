@@ -99,13 +99,14 @@ const paletteColors = document.querySelectorAll(".palette > *");
   
   for (const color of paletteColors) {
     color.addEventListener("click", () => {
+      if (!color.classList.contains("color-selected")) {
+        for (const color of paletteColors) {
+            if (color.classList.contains("color-selected")) {
+              color.classList.toggle("color-selected");
+            }
+        }
+      }
       color.classList.toggle("color-selected");
-      // if (!color.classList.contains("color-selected")) {
-      //   for (const color of paletteColors) {
-      //       color.replace("color-selected", "");
-      //   }
-      // }
-      // color.classList.add("color-selected");
     });
   }
   
