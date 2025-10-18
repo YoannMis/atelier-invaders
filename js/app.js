@@ -1,14 +1,9 @@
-// On récupère l'objet #grid
+// Get the grid element from the DOM
 const grid = document.getElementById("grid");
-// Demande à l'utilisateur de la taille de la grille
-// const userInput = Number(prompt("Taille de la grille ?"));
-// On met un style CSS à la grille pour gérer le nombre de colonnes
 
-// On récupère le formulaire
-// const form = document.querySelector("form");
-
-// On créé un formulaire en JS
+// Create the form
 const form = document.createElement("form");
+// Create input for grid size
 const gridSizeInput = document.createElement("input");
 gridSizeInput.classList.add("grid-size")
 gridSizeInput.setAttribute("type", "number");
@@ -16,9 +11,7 @@ gridSizeInput.setAttribute("min", "0");
 gridSizeInput.setAttribute("max", "100");
 gridSizeInput.setAttribute("step", "1");
 gridSizeInput.setAttribute("placeholder", "Taille de la grille");
-
-
-
+// Create input for pixel size
 const pixelSizeInput = document.createElement("input");
 pixelSizeInput.classList.add("grid-size")
 pixelSizeInput.setAttribute("type", "number");
@@ -26,87 +19,72 @@ pixelSizeInput.setAttribute("min", "0");
 pixelSizeInput.setAttribute("max", "100");
 pixelSizeInput.setAttribute("step", "1");
 pixelSizeInput.setAttribute("placeholder", "Taille des pixels");
-
-
+// Create submit button
 const button = document.createElement("button");
 button.setAttribute("type", "submit");
 button.textContent = "Valider";
 
+// Get the header element and append the form
 const header = document.querySelector("header");
-header.appendChild(form);
-form.append(gridSizeInput, pixelSizeInput, button);
+header.appendChild(form); // Add form to header
+form.append(gridSizeInput, pixelSizeInput, button); // Add inputs and button to the form
 
-
-// On récupère l'élément input .grid-size
-// const gridSizeInput = document.querySelector(".grid-size");
-// On récupère l'élément input .pixel-size
-// const pixelSizeInput = document.querySelector(".pixel-size");
-
-// Quand on clique sur le bouton on récupère la valeur de l'input .grid-size
+/**
+ * Handles form submission to create the grid and pixels
+ * @param {Event} event - The submit event
+ */
 form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  // On récupère tous les pixels
-  // On supprime les pixels du dom
+  event.preventDefault(); // Prevent default form submission
+  // Remove all existing pixels from the grid
   const pixelsToRemove = document.querySelectorAll('.pixel');
   for (const pixel of pixelsToRemove) {
-    pixel.remove();
+    pixel.remove(); // Remove pixel element
   }
-  
-  // On crée la grille
+  // Get values from inputs
   const gridSizeInputValue = gridSizeInput.value;
   const pixelSizeInputValue = pixelSizeInput.value;
-  
-  
+  // Set grid columns based on input value
   grid.style.gridTemplateColumns = `repeat(${gridSizeInputValue}, 1fr)`;
-  
-  
-  
+  // Create pixels for the grid
   for (let round = 0; round < Math.pow(gridSizeInputValue, 2); round++) {
-    // On crée un élément pixel
-    const pixel = document.createElement("div");
-    // On lui ajoute la class="pixel"
-    pixel.classList.add("pixel", "grey");
-    // On lui ajoute la height et width
-    pixel.style.height = pixel.style.width = `${pixelSizeInputValue}px`;
-    // On l'ajoute dans la #grid
-    grid.appendChild(pixel);
+    const pixel = document.createElement("div"); // Create pixel div
+    pixel.classList.add("pixel", "grey"); // Add classes for pixel
+    pixel.style.height = pixel.style.width = `${pixelSizeInputValue}px`; // Set pixel size
+    grid.appendChild(pixel); // Add pixel to grid
 
+    /**
+     * Handles click event to change pixel color
+     */
     pixel.addEventListener("click", () => {
-      // Ajout d'un toggle pour activer ou désactiver la couleur dark sur un pixel
-      // pixel.classList.toggle("dark");
-
-      // Changer la couleur avec une couleur choisie dans la palette
-      // Récupérer la couleur sélectionnée dans la palette
+      // Get the selected color from palette
       const colorSelect = document.querySelector(".color-selected").classList.item(0);
-      // Récupérer la couleur actuelle du pixel sur lequel on a cliqué
+      // Get current color of the pixel
       const currentPixelColor = pixel.classList.item(1);
-      // Remplacer la couleur actuelle du pixel par la couleur sélectionnée sur la palette
+      // Replace current color with selected color
       pixel.classList.replace(currentPixelColor, colorSelect);
     });
   }
-  form.reset();
+  form.reset(); // Reset form inputs
 });
 
-// Gestion sélection de la palette de couleur
-
-//On récupère toutes les couleurs 
-
-
-//Si on click sur un bouton est que celui-ci n'est pas sélectionné
-//alors il devient sélectionné et tous les autres boutons se déselectionnent
-
+// Get all color elements from the palette
 const paletteColors = document.querySelectorAll(".palette > *");
-  
-  for (const color of paletteColors) {
-    color.addEventListener("click", () => {
-      if (!color.classList.contains("color-selected")) {
-        for (const color of paletteColors) {
-            if (color.classList.contains("color-selected")) {
-              color.classList.toggle("color-selected");
-            }
+
+/**
+ * Handles click event to select a color from the palette
+ */
+for (const color of paletteColors) {
+  color.addEventListener("click", () => {
+    // If the color is not already selected
+    if (!color.classList.contains("color-selected")) {
+      // Remove 'color-selected' from all colors
+      for (const color of paletteColors) {
+        if (color.classList.contains("color-selected")) {
+          color.classList.toggle("color-selected");
         }
       }
-      color.classList.toggle("color-selected");
-    });
-  }
-  
+    }
+    // Toggle 'color-selected' on the clicked color
+    color.classList.toggle("color-selected");
+  });
+}
